@@ -35,7 +35,7 @@ angular.module('MyApp')
       url: '/package',
       cache: true,
       views: {
-        'packageTabView@app.home.tabs': {
+        'packageTabView': {
           templateUrl: 'templates/views/package.html'
         }
       }
@@ -44,9 +44,8 @@ angular.module('MyApp')
       url: '/route',
       cache: true,
       views: {
-        'routeTabView@app.home.tabs': {
-          templateUrl: 'templates/views/route.html',
-          controller: 'RouteController'
+        'routeTabView': {
+          templateUrl: 'templates/views/route.html'
         }
       }
     })
@@ -54,9 +53,8 @@ angular.module('MyApp')
       url: '/search',
       cache: true,
       views: {
-        'searchTabView@app.home.tabs': {
-          templateUrl: 'templates/views/search.html',
-          controller: 'SearchController'
+        'searchTabView': {
+          templateUrl: 'templates/views/search.html'
         }
       }
     })
