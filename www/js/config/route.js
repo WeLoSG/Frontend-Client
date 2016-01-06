@@ -25,37 +25,41 @@ angular.module('MyApp')
     .state('app.home.tabs', {
       url: '/tabs',
       abstract: true,
-      templateUrl: 'templates/views/tabs.html'
+      views: {
+        'homeView@app.home': {
+          templateUrl: 'templates/views/tabs.html'
+        }
+      }
     })
     .state('app.home.tabs.package', {
       url: '/package',
       cache: true,
       views: {
-        'viewContent': {
+        'packageTabView@app.home.tabs': {
           templateUrl: 'templates/views/package.html'
         }
       }
     })
-    // .state('app.home.tabs.route', {
-    //   url: '/route',
-    //   cache: true,
-    //   views: {
-    //     'viewContent': {
-    //       templateUrl: 'templates/views/route.html',
-    //       controller: 'RouteController'
-    //     }
-    //   }
-    // })
-    // .state('app.home.tabs.search', {
-    //   url: '/search',
-    //   cache: true,
-    //   views: {
-    //     'viewContent': {
-    //       templateUrl: 'templates/views/search.html',
-    //       controller: 'SearchController'
-    //     }
-    //   }
-    // })
+    .state('app.home.tabs.route', {
+      url: '/route',
+      cache: true,
+      views: {
+        'routeTabView@app.home.tabs': {
+          templateUrl: 'templates/views/route.html',
+          controller: 'RouteController'
+        }
+      }
+    })
+    .state('app.home.tabs.search', {
+      url: '/search',
+      cache: true,
+      views: {
+        'searchTabView@app.home.tabs': {
+          templateUrl: 'templates/views/search.html',
+          controller: 'SearchController'
+        }
+      }
+    })
     .state('app.account', {
       url: '/account',
       cache: true,
