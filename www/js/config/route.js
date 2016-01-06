@@ -14,7 +14,7 @@ angular.module('MyApp')
     })
     .state('app.home', {
       url: '/home',
-      cache: true,
+      abstract: true,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/home.html',
