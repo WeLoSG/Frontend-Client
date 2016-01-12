@@ -11,8 +11,6 @@ angular.module('MyApp')
     $sessionStorage) {
     var markers = [];
 
-    $scope.userid = $sessionStorage.get('userid', null);
-
     // Adds a marker to the map and push to the array.
     function addMarker(location) {
       var marker = new google.maps.Marker({
@@ -48,7 +46,10 @@ angular.module('MyApp')
           pos.coords.longitude);
         console.log(myLocation.lat());
         console.log(myLocation.lng());
-        $scope.map.setCenter({lat: myLocation.lat(), lng: myLocation.lng()});
+        $scope.map.setCenter({
+          lat: myLocation.lat(),
+          lng: myLocation.lng()
+        });
         $scope.map.setZoom(14);
 
         addMarker(myLocation);
@@ -57,7 +58,6 @@ angular.module('MyApp')
           lat: pos.coords.latitude,
           lng: pos.coords.longitude
         };
-        sendLocation('init', LatLng);
 
         $ionicLoading.hide();
       }, function(error) {
@@ -67,18 +67,7 @@ angular.module('MyApp')
     };
 
     // Socket
-    function sendLocation(eventName, location) {
-      socket.emit(eventName, {
-        id: $scope.userid,
-        location: location
-      });
-    }
-
     socket.on('connect', function() {
       console.log('connected');
-    });
-
-    socket.on('syncCord', function(data) {
-      console.log('New message received: ' + data);
     });
   });
