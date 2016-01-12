@@ -14,7 +14,7 @@ angular.module('MyApp')
     })
     .state('app.home', {
       url: '/home',
-      abstract: true,
+      cache: true,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/home.html',
@@ -45,7 +45,8 @@ angular.module('MyApp')
       cache: true,
       views: {
         'routeTabView': {
-          templateUrl: 'templates/views/route.html'
+          templateUrl: 'templates/views/route.html',
+          controller: 'RouteController'
         }
       }
     })

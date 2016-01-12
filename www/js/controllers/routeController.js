@@ -2,14 +2,15 @@
 
 /**
  * @ngdoc function
- * @name MyApp.controller:MapController
+ * @name MyApp.controller:RouteController
  * @description
- * # MapController
+ * # RouteController
  */
 angular.module('MyApp')
-  .controller('MapController', function($scope, $ionicLoading, socket,
+  .controller('RouteController', function($scope, $ionicLoading, socket,
     $sessionStorage) {
     var markers = [];
+
     $scope.userid = $sessionStorage.get('userid', null);
 
     // Adds a marker to the map and push to the array.
@@ -45,7 +46,9 @@ angular.module('MyApp')
       navigator.geolocation.getCurrentPosition(function(pos) {
         var myLocation = new google.maps.LatLng(pos.coords.latitude,
           pos.coords.longitude);
-        $scope.map.setCenter(myLocation);
+        console.log(myLocation.lat());
+        console.log(myLocation.lng());
+        $scope.map.setCenter({lat: myLocation.lat(), lng: myLocation.lng()});
         $scope.map.setZoom(14);
 
         addMarker(myLocation);
@@ -61,7 +64,6 @@ angular.module('MyApp')
         console.log('Unable to get location: ' + error.message);
         $ionicLoading.hide();
       });
-
     };
 
     // Socket
