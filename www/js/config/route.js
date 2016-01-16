@@ -55,7 +55,8 @@ angular.module('MyApp')
       cache: true,
       views: {
         'searchTabView': {
-          templateUrl: 'templates/views/search.html'
+          templateUrl: 'templates/views/search.html',
+          controller: 'SearchController'
         }
       }
     })
