@@ -22,44 +22,44 @@ angular.module('MyApp')
         }
       }
     })
-    .state('app.home.tabs', {
-      url: '/tabs',
-      abstract: true,
-      views: {
-        'homeView@app.home': {
-          templateUrl: 'templates/views/tabs.html'
-        }
-      }
-    })
-    .state('app.home.tabs.package', {
-      url: '/package',
-      cache: true,
-      views: {
-        'packageTabView': {
-          templateUrl: 'templates/views/package.html'
-        }
-      }
-    })
-    .state('app.home.tabs.route', {
-      url: '/route',
-      cache: true,
-      views: {
-        'routeTabView': {
-          templateUrl: 'templates/views/route.html',
-          controller: 'RouteController'
-        }
-      }
-    })
-    .state('app.home.tabs.search', {
-      url: '/search',
-      cache: true,
-      views: {
-        'searchTabView': {
-          templateUrl: 'templates/views/search.html',
-          controller: 'SearchController'
-        }
-      }
-    })
+    // .state('app.home.tabs', {
+    //   url: '/tabs',
+    //   abstract: true,
+    //   views: {
+    //     'homeView@app.home': {
+    //       templateUrl: 'templates/views/tabs.html'
+    //     }
+    //   }
+    // })
+    // .state('app.home.tabs.package', {
+    //   url: '/package',
+    //   cache: true,
+    //   views: {
+    //     'packageTabView': {
+    //       templateUrl: 'templates/views/package.html'
+    //     }
+    //   }
+    // })
+    // .state('app.home.tabs.route', {
+    //   url: '/route',
+    //   cache: true,
+    //   views: {
+    //     'routeTabView': {
+    //       templateUrl: 'templates/views/route.html',
+    //       controller: 'RouteController'
+    //     }
+    //   }
+    // })
+    // .state('app.home.tabs.search', {
+    //   url: '/search',
+    //   cache: true,
+    //   views: {
+    //     'searchTabView': {
+    //       templateUrl: 'templates/views/search.html',
+    //       controller: 'SearchController'
+    //     }
+    //   }
+    // })
     .state('app.account', {
       url: '/account',
       cache: true,
@@ -82,5 +82,5 @@ angular.module('MyApp')
     });
 
   // redirects to default route for undefined routes
-  $urlRouterProvider.otherwise('/app/home/tabs/package');
+  $urlRouterProvider.otherwise('/app/home');
 });
