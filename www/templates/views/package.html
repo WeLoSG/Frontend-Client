@@ -1,16 +1,22 @@
-<ion-content class="has-subheader">
-	<ion-list class="list-inset">
-		<ion-item class="item-icon-left item-icon-right" href="#/app/home/tabs/pageDeatil">
-			<i class="icon ion-document-text"></i> DOCUMENT <i class="icon ion-chevron-right"></i>
-		</ion-item>
-		<ion-item class="item-icon-left item-icon-right" href="#/app/home/tabs/pageDeatil">
-            <i class="icon ion-ios-filing"></i> SMALL PARCEL <i class="icon ion-chevron-right"></i>
-        </ion-item>
-        <ion-item class="item-icon-left item-icon-right" href="#/app/home/tabs/pageDeatil">
-            <i class="icon ion-ios-box"></i> MEDIUM PARCEL <i class="icon ion-chevron-right"></i>
-        </ion-item>
-        <ion-item class="item-icon-left item-icon-right" href="#/app/home/tabs/pageDeatil">
-            <i class="icon ion-cube"></i> LARGE PARCEL <i class="icon ion-chevron-right"></i>
-        </ion-item>
-	</ion-list>
-</ion-content>
+<ion-view>
+    <ion-header-bar align-title="center" class="bar-positive">
+        <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+        <h1 class="title">PACKAGE TYPE</h1>
+    </ion-header-bar>  
+    <ion-content>
+    	<ion-list class="package-type-list">
+    		<ion-item class="item-icon-left item-icon-right" ng-click="goToDetailPage()">
+    			<i class="icon ion-document-text"></i><span class="item-text">DOCUMENT</span><i class="icon ion-chevron-right"></i>
+    		</ion-item>
+    		<ion-item class="item-icon-left item-icon-right" ng-click="goToDetailPage()">
+                <i class="icon ion-ios-filing"></i><span class="item-text">SMALL PARCEL</span><i class="icon ion-chevron-right"></i>
+            </ion-item>
+            <ion-item class="item-icon-left item-icon-right" ng-click="goToDetailPage()">
+                <i class="icon ion-ios-box"></i><span class="item-text">MEDIUM PARCEL</span><i class="icon ion-chevron-right"></i>
+            </ion-item>
+            <ion-item class="item-icon-left item-icon-right" ng-click="goToDetailPage()">
+                <i class="icon ion-cube"></i><span class="item-text">LARGE PARCEL</span><i class="icon ion-chevron-right"></i>
+            </ion-item>
+    	</ion-list>
+    </ion-content>
+</ion-view>

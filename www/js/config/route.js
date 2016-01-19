@@ -31,15 +31,25 @@ angular.module('MyApp')
     //     }
     //   }
     // })
-    // .state('app.home.tabs.package', {
-    //   url: '/package',
-    //   cache: true,
-    //   views: {
-    //     'packageTabView': {
-    //       templateUrl: 'templates/views/package.html'
-    //     }
-    //   }
-    // })
+    .state('app.package', {
+      url: '/package',
+      cache: true,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/package.html',
+          controller: 'PackageController'
+        }
+      }
+    })
+    .state('app.detail', {
+      url: '/detail',
+      cache: true,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/detail.html'
+        }
+      }
+    })
     // .state('app.home.tabs.route', {
     //   url: '/route',
     //   cache: true,

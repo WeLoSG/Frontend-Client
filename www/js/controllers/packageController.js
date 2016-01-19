@@ -2,19 +2,19 @@
 
 /**
  * @ngdoc function
- * @name MyApp.controller:HomeController
+ * @name MyApp.controller:PackageController
  * @description
- * # HomeController
+ * # PackageController
  */
 angular.module('MyApp')
-  .controller('HomeController', function($scope, $state, $ionicHistory) {
-  	$scope.goToPackagePage = function() {
+  .controller('PackageController', function($scope, $state, $ionicHistory) {
+  	$scope.goToDetailPage = function() {
       $ionicHistory.nextViewOptions({
         disableBack: true,
         disableAnimate: true,
         historyRoot: true
       });
 
-      $state.go('app.package');
+      $state.go('app.detail');
     };
   });
