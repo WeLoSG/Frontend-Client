@@ -46,20 +46,21 @@ angular.module('MyApp')
       cache: true,
       views: {
         'viewContent': {
-          templateUrl: 'templates/views/detail.html'
+          templateUrl: 'templates/views/detail.html',
+          controller: 'DetailController'
         }
       }
     })
-    // .state('app.home.tabs.route', {
-    //   url: '/route',
-    //   cache: true,
-    //   views: {
-    //     'routeTabView': {
-    //       templateUrl: 'templates/views/route.html',
-    //       controller: 'RouteController'
-    //     }
-    //   }
-    // })
+    .state('app.route', {
+      url: '/route',
+      cache: true,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/route.html',
+          controller: 'RouteController'
+        }
+      }
+    })
     // .state('app.home.tabs.search', {
     //   url: '/search',
     //   cache: true,

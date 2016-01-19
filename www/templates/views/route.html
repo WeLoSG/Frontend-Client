@@ -1,17 +1,41 @@
-<ion-content class="has-subheader route-main">
-	<ion-list class="list-inset">
-		<ion-item class="item-icon-left">
-			<i class="icon ion-ios-location"></i>
-			<label class="item item-input">
-    			<input type="text" placeholder="Pick up from">
+<ion-view>
+	<ion-header-bar align-title="center" class="bar-positive">
+        <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+        <h1 class="title">SET ROUTE</h1>
+    </ion-header-bar>
+	<ion-content class="route-main">
+		<ion-list class="list-inset">
+			<ion-item class="item-icon-left">
+				<i class="icon ion-ios-location"></i>
+				<label class="item item-input">
+	    			<input type="text" placeholder="Pick up from">
+	  			</label>
+			</ion-item>
+			<ion-item class="item-icon-left">
+				<i class="icon ion-ios-location"></i>
+				<label class="item item-input">
+	    			<input type="text" placeholder="Destination">
+	  			</label>
+			</ion-item>
+		</ion-list>
+		<map on-create="initMap(map)"></map>
+		<ion-list class="list-inset">
+    		<label class="item item-input">
+    			<i class="icon ion-bookmark"></i>
+    			<input type="text" placeholder="Est. Fare">
   			</label>
-		</ion-item>
-		<ion-item class="item-icon-left">
-			<i class="icon ion-ios-location"></i>
-			<label class="item item-input">
-    			<input type="text" placeholder="Destination">
+  			<label class="item item-input">
+  				<i class="icon ion-help-buoy"></i>
+    			<input type="text" placeholder="Promo Code">
   			</label>
-		</ion-item>
-	</ion-list>
-	<map on-create="initMap(map)"></map>
-</ion-content>
+  			<label class="item item-input">
+  				<i class="icon ion-calculator"></i>
+    			<input type="datetime" placeholder="Payment Mode">
+  			</label>
+    	</ion-list>
+    	<div class="button-bar">
+    		<a class="button icon-left ion-chevron-left button-calm" ng-click="goToPreviousPage()"></a>
+    		<a class="button button-balanced" ng-click="goToRoutePage()">SEARCH</a>
+    	</div>
+	</ion-content>
+</ion-view>

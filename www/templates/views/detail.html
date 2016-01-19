@@ -5,7 +5,42 @@
     </ion-header-bar>  
     <ion-content>
     	<ion-list class="list-inset package-detail-list">
-    		<ion-item>test</ion-item>
+    		<label class="item item-input">
+    			<i class="icon ion-person"></i>
+    			<input type="text" placeholder="Recipient Name">
+  			</label>
+  			<label class="item item-input">
+  				<i class="icon ion-android-phone-portrait"></i>
+    			<input type="tel" placeholder="Recipient Contact">
+  			</label>
+  			<label class="item item-input">
+  				<i class="icon ion-compose"></i>
+    			<input type="text" placeholder="Remarks (optional)">
+  			</label>
     	</ion-list>
+    	<ion-list class="list-inset package-detail-list">
+    		<label class="item item-input">
+    			<i class="icon ion-clipboard"></i>
+    			<input type="text" placeholder="Document">
+  			</label>
+  			<label class="item item-input">
+  				<i class="icon ion-bag"></i>
+    			<input type="text" placeholder="Approximate Weight">
+  			</label>
+  			<label class="item item-input">
+  				<i class="icon ion-clock"></i>
+    			<input type="datetime" placeholder="Pick Up Time">
+  			</label>
+    	</ion-list>
+    	<ion-list class="list-inset package-detail-list">
+    		<label class="item item-input">
+    			<i class="icon ion-camera"></i>
+    			<input type="text" placeholder="Photo">
+  			</label>
+    	</ion-list>
+    	<div class="button-bar">
+    		<a class="button icon-left ion-chevron-left button-calm" ng-click="goToPreviousPage()"></a>
+    		<a class="button button-balanced" ng-click="goToRoutePage()">SET ROUTE</a>
+    	</div>
     </ion-content>
 </ion-view>

@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   .controller('RouteController', function($scope, $ionicLoading, socket,
-    $sessionStorage) {
+    $sessionStorage, $ionicHistory, $state) {
     var markers = [];
 
     // Adds a marker to the map and push to the array.
@@ -64,6 +64,20 @@ angular.module('MyApp')
         console.log('Unable to get location: ' + error.message);
         $ionicLoading.hide();
       });
+    };
+
+    $scope.goToPreviousPage = function() {
+      $ionicHistory.goBack();
+    };
+
+    $scope.goToSearchPage = function() {
+      $ionicHistory.nextViewOptions({
+        disableBack: true,
+        disableAnimate: true,
+        historyRoot: true
+      });
+
+      $state.go('app.search');
     };
 
     // Socket
