@@ -14,11 +14,20 @@ angular.module('MyApp')
 
 // development
 .constant('API_ENDPOINT', {
-  host: 'http://localhost',
-  port: 3000,
-  path: '',
-  needsAuth: false
-});
+    host: 'http://localhost',
+    port: 3000,
+    path: '',
+    needsAuth: false
+  })
+  .constant('GEO_POSTAL_ENDPOINT',
+    'http://gothere.sg/maps/geo'
+  )
+  // .constant('GEO_POSTAL_ENDPOINT',
+  //   'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyALKC1tljWTKklkQBusA89LXkcu5MxhW68&components=country:SG&address='
+  // )
+  .constant('GEO_PLACE_ENDPOINT',
+    'https://maps.googleapis.com/maps/api/place/textsearch/json?&components=country:SG&key=AIzaSyALKC1tljWTKklkQBusA89LXkcu5MxhW68&query='
+  );
 
 
 // live example with HTTP Basic Auth
