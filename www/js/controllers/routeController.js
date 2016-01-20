@@ -10,7 +10,7 @@ angular.module('MyApp')
   .controller('RouteController', function($scope, $ionicLoading, socket,
     $sessionStorage, $ionicHistory, $state) {
     var markers = [];
-    this.delivery = {
+    this.deliveryInfo = {
       from: '',
       to: '',
       fare: '',
@@ -78,6 +78,7 @@ angular.module('MyApp')
         historyRoot: true
       });
 
+      $sessionStorage.setObject('deliveryInfo', this.deliveryInfo);
 
       $state.go('app.search');
     };

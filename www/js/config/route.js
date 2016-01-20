@@ -61,16 +61,16 @@ angular.module('MyApp')
         }
       }
     })
-    // .state('app.home.tabs.search', {
-    //   url: '/search',
-    //   cache: true,
-    //   views: {
-    //     'searchTabView': {
-    //       templateUrl: 'templates/views/search.html',
-    //       controller: 'SearchController'
-    //     }
-    //   }
-    // })
+    .state('app.search', {
+      url: '/search',
+      cache: true,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/search.html',
+          controller: 'SearchController'
+        }
+      }
+    })
     .state('app.account', {
       url: '/account',
       cache: true,

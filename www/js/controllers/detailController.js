@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   .controller('DetailController', function($scope, $state, $ionicHistory, $sessionStorage) {
-    this.packet = {
+    this.packageInfo = {
       recipientName: '',
       recipientContact: '',
       remarks: '',
@@ -23,7 +23,7 @@ angular.module('MyApp')
         historyRoot: true
       });
 
-      $sessionStorage.setObject('packetInfo', this.delivery);
+      $sessionStorage.setObject('packageInfo', this.packageInfo);
 
       $state.go('app.route');
     };
