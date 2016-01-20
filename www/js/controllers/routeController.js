@@ -10,6 +10,13 @@ angular.module('MyApp')
   .controller('RouteController', function($scope, $ionicLoading, socket,
     $sessionStorage, $ionicHistory, $state) {
     var markers = [];
+    this.delivery = {
+      from: '',
+      to: '',
+      fare: '',
+      promocode: '',
+      payment: ''
+    };
 
     // Adds a marker to the map and push to the array.
     function addMarker(location) {
@@ -44,8 +51,6 @@ angular.module('MyApp')
       navigator.geolocation.getCurrentPosition(function(pos) {
         var myLocation = new google.maps.LatLng(pos.coords.latitude,
           pos.coords.longitude);
-        console.log(myLocation.lat());
-        console.log(myLocation.lng());
         $scope.map.setCenter({
           lat: myLocation.lat(),
           lng: myLocation.lng()
@@ -66,16 +71,13 @@ angular.module('MyApp')
       });
     };
 
-    $scope.goToPreviousPage = function() {
-      $ionicHistory.goBack();
-    };
-
     $scope.goToSearchPage = function() {
       $ionicHistory.nextViewOptions({
         disableBack: true,
         disableAnimate: true,
         historyRoot: true
       });
+
 
       $state.go('app.search');
     };

@@ -8,13 +8,13 @@
 			<ion-item class="item-icon-left">
 				<i class="icon ion-ios-location"></i>
 				<label class="item item-input">
-	    			<input type="text" placeholder="Pick up from">
+	    			<input type="text" placeholder="Pick up from" ng-model="delivery.from">
 	  			</label>
 			</ion-item>
 			<ion-item class="item-icon-left">
 				<i class="icon ion-ios-location"></i>
 				<label class="item item-input">
-	    			<input type="text" placeholder="Destination">
+	    			<input type="text" placeholder="Destination" ng-model="delivery.to">
 	  			</label>
 			</ion-item>
 		</ion-list>
@@ -22,20 +22,24 @@
 		<ion-list class="list-inset">
     		<label class="item item-input">
     			<i class="icon ion-bookmark"></i>
-    			<input type="text" placeholder="Est. Fare">
+    			<input type="text" placeholder="Est. Fare" ng-model="delivery.fare">
   			</label>
   			<label class="item item-input">
   				<i class="icon ion-help-buoy"></i>
-    			<input type="text" placeholder="Promo Code">
+    			<input type="text" placeholder="Promo Code" ng-model="delivery.promocode">
   			</label>
   			<label class="item item-input">
-  				<i class="icon ion-calculator"></i>
-    			<input type="datetime" placeholder="Payment Mode">
+          <div class="input-label"><i class="icon ion-calculator"></i>&nbsp;&nbsp;Payment Mode</div>
+          <select ng-model="delivery.payment">
+            <option>Credit Crad</option>
+            <option>Paypal</option>
+            <option>Cash</option>
+          </select>
   			</label>
     	</ion-list>
     	<div class="button-bar">
-    		<a class="button icon-left ion-chevron-left button-calm" ng-click="goToPreviousPage()"></a>
-    		<a class="button button-balanced" ng-click="goToRoutePage()">SEARCH</a>
+    		<a class="button icon-left ion-chevron-left button-assertive" href="#/app/detail"></a>
+    		<a class="button button-balanced icon-right ion-chevron-right" ng-click="goToRoutePage()">FIND DRIVER</a>
     	</div>
 	</ion-content>
 </ion-view>

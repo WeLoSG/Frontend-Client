@@ -7,15 +7,15 @@
     	<ion-list class="list-inset package-detail-list">
     		<label class="item item-input">
     			<i class="icon ion-person"></i>
-    			<input type="text" placeholder="Recipient Name">
+    			<input type="text" placeholder="Recipient Name" ng-model="packet.recipientName">
   			</label>
   			<label class="item item-input">
   				<i class="icon ion-android-phone-portrait"></i>
-    			<input type="tel" placeholder="Recipient Contact">
+    			<input type="tel" placeholder="Recipient Contact" ng-model="packet.recipientContact">
   			</label>
   			<label class="item item-input">
   				<i class="icon ion-compose"></i>
-    			<input type="text" placeholder="Remarks (optional)">
+    			<input type="text" placeholder="Remarks (optional)" ng-model="packet.remarks">
   			</label>
     	</ion-list>
     	<ion-list class="list-inset package-detail-list">
@@ -25,11 +25,11 @@
   			</label>
   			<label class="item item-input">
   				<i class="icon ion-bag"></i>
-    			<input type="text" placeholder="Approximate Weight">
+    			<input type="text" placeholder="Approximate Weight" ng-model="packet.weight">
   			</label>
   			<label class="item item-input">
   				<i class="icon ion-clock"></i>
-    			<input type="datetime" placeholder="Pick Up Time">
+    			<input type="datetime" placeholder="Pick Up Time" ng-model="packet.pickUpTime">
   			</label>
     	</ion-list>
     	<ion-list class="list-inset package-detail-list">
@@ -39,8 +39,8 @@
   			</label>
     	</ion-list>
     	<div class="button-bar">
-    		<a class="button icon-left ion-chevron-left button-calm" ng-click="goToPreviousPage()"></a>
-    		<a class="button button-balanced" ng-click="goToRoutePage()">SET ROUTE</a>
+    		<a class="button icon-left ion-chevron-left button-assertive" href="#/app/package"></a>
+    		<a class="button button-balanced icon-right ion-chevron-right" ng-click="goToRoutePage()">SET ROUTE</a>
     	</div>
     </ion-content>
 </ion-view>

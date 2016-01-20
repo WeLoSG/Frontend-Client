@@ -7,9 +7,13 @@
  * # DetailController
  */
 angular.module('MyApp')
-  .controller('DetailController', function($scope, $state, $ionicHistory) {
-  	$scope.goToPreviousPage = function() {
-      $ionicHistory.backView().go();
+  .controller('DetailController', function($scope, $state, $ionicHistory, $sessionStorage) {
+    this.packet = {
+      recipientName: '',
+      recipientContact: '',
+      remarks: '',
+      weight: '',
+      pickUpTime: ''
     };
 
     $scope.goToRoutePage = function() {
@@ -18,6 +22,8 @@ angular.module('MyApp')
         disableAnimate: true,
         historyRoot: true
       });
+
+      $sessionStorage.setObject('packetInfo', this.delivery);
 
       $state.go('app.route');
     };
