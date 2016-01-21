@@ -1,5 +1,9 @@
-.package-type-list {
-	ion-item {
-		height: 23.5vh;
+.package-main {
+	.package-type-list {
+		ion-item {
+			height: 18vh;
+			display: flex;
+  		align-items: center;
+		}
 	}
 }

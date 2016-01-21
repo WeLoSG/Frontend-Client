@@ -30,4 +30,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include views/
 @import "views/home/home.scss";
 @import "views/home/package.scss";
+@import "views/home/detail.scss";
 @import "views/route/route.scss";
+
+@import "default.scss";
