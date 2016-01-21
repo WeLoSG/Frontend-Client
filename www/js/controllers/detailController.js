@@ -16,6 +16,8 @@ angular.module('MyApp')
       pickUpTime: ''
     };
 
+    $scope.packageType = ' ' + $sessionStorage.get('packageType') + ' package';
+
     $scope.goToPreviousPage = function() {
       console.log("haha");
       $ionicHistory.backView().go();

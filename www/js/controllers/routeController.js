@@ -152,6 +152,9 @@ angular.module('MyApp')
         disableAnimate: true,
         historyRoot: true
       });
+
+      this.deliveryInfo.from = document.getElementById('from-address').value;
+      this.deliveryInfo.to = document.getElementById('to-address').value;
       console.log(this.deliveryInfo);
       $sessionStorage.setObject('deliveryInfo', this.deliveryInfo);
 
