@@ -132,15 +132,13 @@ angular.module('MyApp')
     };
 
     $scope.getAddressForFrom = function() {
-      // console.log(this.deliveryInfo.from);
-      var result;
       MapService.getLatLngFromPostcode($scope.map, this.deliveryInfo.from, MapService.getAddressFromLatLng);
-      // console.log(position);
-      // MapService.getAddressFromLatLng(position);
+      // Fill the input of from-address
     };
 
     $scope.getAddressForTo = function() {
-      
+      MapService.getLatLngFromPostcode($scope.map, this.deliveryInfo.from, MapService.getAddressFromLatLng);
+      // Fill the input of to-address
     };
 
     $scope.goToPreviousPage = function() {
