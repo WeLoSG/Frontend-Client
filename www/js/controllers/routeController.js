@@ -11,8 +11,8 @@ angular.module('MyApp')
     $sessionStorage, $ionicHistory, $state, MapService) {
     var markers = [];
 
-    this.deliveryInfo = {
-      from: 'haha',
+    $scope.deliveryInfo = {
+      from: '',
       to: '',
       fare: '',
       promocode: '',
@@ -152,7 +152,7 @@ angular.module('MyApp')
         disableAnimate: true,
         historyRoot: true
       });
-
+      console.log(this.deliveryInfo);
       $sessionStorage.setObject('deliveryInfo', this.deliveryInfo);
 
       $state.go('app.search');
