@@ -9,7 +9,6 @@
 angular.module('MyApp')
   .controller('RouteController', function($scope, $ionicLoading, socket,
     $sessionStorage, $ionicHistory, $state, MapService) {
-    var markers = [];
 
     $scope.deliveryInfo = {
       from: '',
@@ -35,13 +34,14 @@ angular.module('MyApp')
       marker.addListener('click', function() {
         infoWindow.open($scope.map, marker);
       });
-      markers.push(marker);
     }
 
     function initAutoComplete(map, id) {
       var input = document.getElementById(id);
       var options = {
-        componentRestrictions: {country: 'SG'}//Turkey only
+        componentRestrictions: {
+          country: 'SG'
+        } //SG only
       };
 
       var autocomplete = new google.maps.places.Autocomplete(input, options);
@@ -57,9 +57,14 @@ angular.module('MyApp')
       autocomplete.addListener('place_changed', function() {
         infowindow.close();
         marker.setVisible(false);
+
+        // Get autocomplete address
         var place = autocomplete.getPlace();
+        console.log(place);
+
         if (!place.geometry) {
-          window.alert("Autocomplete's returned place contains no geometry");
+          console.log(
+            'Autocomplete\'s returned place contains no geometry');
           return;
         }
 
@@ -68,7 +73,7 @@ angular.module('MyApp')
           map.fitBounds(place.geometry.viewport);
         } else {
           map.setCenter(place.geometry.location);
-          map.setZoom(17);  // Why 17? Because it looks good.
+          map.setZoom(17); // Why 17? Because it looks good.
         }
         marker.setIcon({
           url: place.icon,
@@ -83,13 +88,15 @@ angular.module('MyApp')
         var address = '';
         if (place.address_components) {
           address = [
-            (place.address_components[0] && place.address_components[0].short_name || ''),
-            (place.address_components[1] && place.address_components[1].short_name || ''),
-            (place.address_components[2] && place.address_components[2].short_name || '')
+            (place.address_components[0] && place.address_components[0]
+              .short_name || ''), (place.address_components[1] && place
+              .address_components[1].short_name || ''), (place.address_components[
+              2] && place.address_components[2].short_name || '')
           ].join(' ');
         }
 
-        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+        infowindow.setContent('<div><strong>' + place.name +
+          '</strong><br>' + address);
         infowindow.open(map, marker);
       });
     }
@@ -131,30 +138,31 @@ angular.module('MyApp')
       initAutoComplete(map, 'to-address');
     };
 
+    $scope.disableTap = function() {
+      var container = document.getElementsByClassName('pac-container');
+      // disable ionic data tab
+      angular.element(container).attr('data-tap-disabled', 'true');
+      // leave input field if google-address-entry is selected
+      angular.element(container).on('click', function() {
+        document.getElementById('searchBar').blur();
+      });
+    };
+
     $scope.getAddressForFrom = function() {
-      MapService.getLatLngFromPostcode($scope.map, this.deliveryInfo.from, MapService.getAddressFromLatLng);
+      MapService.getLatLngFromPostcode($scope.map, $scope.deliveryInfo.from,
+        MapService.getAddressFromLatLng);
       // Fill the input of from-address
     };
 
     $scope.getAddressForTo = function() {
-      MapService.getLatLngFromPostcode($scope.map, this.deliveryInfo.from, MapService.getAddressFromLatLng);
+      MapService.getLatLngFromPostcode($scope.map, $scope.deliveryInfo.from,
+        MapService.getAddressFromLatLng);
       // Fill the input of to-address
     };
 
-    $scope.goToPreviousPage = function() {
-      console.log("haha");
-      $ionicHistory.goBack();
-    };
-
     $scope.goToSearchPage = function() {
-      $ionicHistory.nextViewOptions({
-        disableBack: true,
-        disableAnimate: true,
-        historyRoot: true
-      });
-
-      this.deliveryInfo.from = document.getElementById('from-address').value;
-      this.deliveryInfo.to = document.getElementById('to-address').value;
+      $scope.deliveryInfo.from = document.getElementById('from-address').value;
+      $scope.deliveryInfo.to = document.getElementById('to-address').value;
       console.log(this.deliveryInfo);
       $sessionStorage.setObject('deliveryInfo', this.deliveryInfo);
 

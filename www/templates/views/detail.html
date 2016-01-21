@@ -1,46 +1,51 @@
 <ion-view>
-    <ion-header-bar align-title="center" class="bar-positive">
-        <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
-        <h1 class="title">PACKAGE DETAIL</h1>
-    </ion-header-bar>  
-    <ion-content>
+    <ion-nav-bar class="bar-positive">
+    </ion-nav-bar>
+    <ion-nav-buttons side="primary">
+      <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      <h1 class="title">PACKAGE DETAIL</h1>
+    </ion-nav-title>
+
+    <ion-content class="detail-main">
     	<ion-list class="list-inset package-detail-list">
-    		<label class="item item-input">
+    		<div class="item item item-icon-left">
     			<i class="icon ion-person"></i>
     			<input type="text" placeholder="Recipient Name" ng-model="packageInfo.recipientName">
-  			</label>
-  			<label class="item item-input">
+  			</div>
+  			<div class="item item item-icon-left">
   				<i class="icon ion-android-phone-portrait"></i>
     			<input type="tel" placeholder="Recipient Contact" ng-model="packageInfo.recipientContact">
-  			</label>
-  			<label class="item item-input">
+  			</div>
+  			<div class="item item item-icon-left">
   				<i class="icon ion-compose"></i>
     			<input type="text" placeholder="Remarks (optional)" ng-model="packageInfo.remarks">
-  			</label>
+  			</div>
     	</ion-list>
     	<ion-list class="list-inset package-detail-list">
-    		<label class="item item-input">
+    		<div class="item item item-icon-left">
     			<i class="icon ion-clipboard"></i>
-    			<input type="text" ng-model="packageType" readonly="true">
-  			</label>
-  			<label class="item item-input">
+    			{{packageType}}
+  			</div>
+  			<div class="item item item-icon-left">
   				<i class="icon ion-bag"></i>
     			<input type="text" placeholder="Approximate Weight" ng-model="packageInfo.weight">
-  			</label>
-  			<label class="item item-input">
+  			</div>
+  			<div class="item item item-icon-left">
   				<i class="icon ion-clock"></i>
     			<input type="datetime" placeholder="Pick Up Time" ng-model="packageInfo.pickUpTime">
-  			</label>
+  			</div>
     	</ion-list>
-    	<ion-list class="list-inset package-detail-list">
-    		<label class="item item-input">
+    	<!-- <ion-list class="list-inset package-detail-list">
+    		<div class="item item item-icon-left">
     			<i class="icon ion-camera"></i>
     			<input type="text" placeholder="Photo">
-  			</label>
-    	</ion-list>
+  			</div>
+    	</ion-list> -->
     	<div class="button-bar">
-    		<a class="button icon-left ion-chevron-left button-assertive" href="#/app/package"></a>
-    		<a class="button button-balanced icon-right ion-chevron-right" ng-click="goToRoutePage()">SET ROUTE</a>
+    		<a class="button icon-left ion-chevron-left button-assertive square-button back-button" ui-sref="app.package"></a>
+    		<a class="button button-balanced icon-right ion-chevron-right square-button forward-button" ng-click="goToRoutePage()">SET ROUTE</a>
     	</div>
     </ion-content>
 </ion-view>

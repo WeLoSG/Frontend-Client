@@ -7,7 +7,9 @@
  * # DetailController
  */
 angular.module('MyApp')
-  .controller('DetailController', function($scope, $state, $ionicHistory, $sessionStorage) {
+  .controller('DetailController', function($scope, $state, $ionicHistory,
+    $sessionStorage) {
+
     this.packageInfo = {
       recipientName: '',
       recipientContact: '',
@@ -16,22 +18,11 @@ angular.module('MyApp')
       pickUpTime: ''
     };
 
-    $scope.packageType = ' ' + $sessionStorage.get('packageType') + ' package';
-
-    $scope.goToPreviousPage = function() {
-      console.log("haha");
-      $ionicHistory.backView().go();
-    };
+    $scope.packageType = ' ' + $sessionStorage.get('packageType') +
+      ' package';
 
     $scope.goToRoutePage = function() {
-      $ionicHistory.nextViewOptions({
-        disableBack: true,
-        disableAnimate: true,
-        historyRoot: true
-      });
-
       $sessionStorage.setObject('packageInfo', this.packageInfo);
-
       $state.go('app.route');
     };
   });
