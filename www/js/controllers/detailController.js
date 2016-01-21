@@ -16,6 +16,11 @@ angular.module('MyApp')
       pickUpTime: ''
     };
 
+    $scope.goToPreviousPage = function() {
+      console.log("haha");
+      $ionicHistory.backView().go();
+    };
+
     $scope.goToRoutePage = function() {
       $ionicHistory.nextViewOptions({
         disableBack: true,
