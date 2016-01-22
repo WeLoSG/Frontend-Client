@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   .controller('RouteController', function($scope, $ionicLoading, socket,
-    $sessionStorage, $ionicHistory, $state, MapService) {
+    $sessionStorage, $ionicHistory, $state, MapService, $ionicPopup) {
 
     $scope.deliveryInfo = {
       from: '',
@@ -97,6 +97,20 @@ angular.module('MyApp')
       });
     }
 
+    function checkMissingField() {
+      if ($scope.deliveryInfo.from == '') {
+        return 'pick up place';
+      } else if ($scope.deliveryInfo.to == '') {
+        return 'destination';
+      } else if ($scope.deliveryInfo.fare == '') {
+        return 'est. fare';
+      } else if ($scope.deliveryInfo.payment == '') {
+        return 'payment mode';
+      } else {
+        return '';
+      }
+    }
+
     $scope.initMap = function(map) {
       $scope.map = map;
 
@@ -157,12 +171,24 @@ angular.module('MyApp')
     };
 
     $scope.goToSearchPage = function() {
-      $scope.deliveryInfo.from = document.getElementById('from-address').value;
-      $scope.deliveryInfo.to = document.getElementById('to-address').value;
-      console.log(this.deliveryInfo);
-      $sessionStorage.setObject('deliveryInfo', this.deliveryInfo);
+      var validationResult = checkMissingField();
 
-      $state.go('app.search');
+      if (validationResult == '') {
+        $scope.deliveryInfo.from = document.getElementById('from-address').value;
+        $scope.deliveryInfo.to = document.getElementById('to-address').value;
+
+        $sessionStorage.setObject('deliveryInfo', this.deliveryInfo);
+        $state.go('app.search');
+      } else {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Missing Field!',
+          template: 'You have to enter the ' + validationResult +'!'
+        });
+        alertPopup.then(function(res) {
+          
+        });
+      }
+      
     };
 
     // Socket
