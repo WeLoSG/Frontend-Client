@@ -3,7 +3,7 @@
     <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
     <h1 class="title">PACKAGE TYPE</h1>
   </ion-header-bar>
-  <ion-content class="package-main">
+  <ion-content class="package-main padding">
     <ion-list class="package-type-list">
       <ion-item class="package-list-item item-icon-left item-icon-right" ng-click="goToDetailPage('document')">
         <i class="icon ion-document-text"></i>
@@ -20,5 +20,6 @@
         <i class="icon ion-cube"></i><span class="item-text">LARGE PARCEL</span><i class="icon ion-chevron-right"></i>
       </ion-item>
     </ion-list>
+  <button class="button button-block button-positive" ui-sref="app.home">Back to home</button>
   </ion-content>
 </ion-view>
