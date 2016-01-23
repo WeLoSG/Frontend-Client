@@ -12,6 +12,26 @@ angular.module('MyApp')
       templateUrl: 'templates/main.html',
       controller: 'MainController'
     })
+    .state('app.login', {
+      url: '/login',
+      cache: true,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/login.html',
+          controller: 'LoginController'
+        }
+      }
+    })
+    .state('app.register', {
+      url: '/register',
+      cache: true,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/register.html',
+          controller: 'RegisterController'
+        }
+      }
+    })
     .state('app.home', {
       url: '/home',
       cache: true,
@@ -93,5 +113,5 @@ angular.module('MyApp')
     });
 
   // redirects to default route for undefined routes
-  $urlRouterProvider.otherwise('/app/home');
+  $urlRouterProvider.otherwise('/app/login');
 });
