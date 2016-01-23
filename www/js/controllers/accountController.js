@@ -7,7 +7,31 @@
  * # AccountController
  */
 angular.module('MyApp')
-  .controller('AccountController', function($scope) {
-    // do something with $scope
+  .controller('AccountController', function($scope, $localStorage, $ionicHistory) {
+    $scope.account = {
+    	email: '',
+    	name: '',
+    	phone: '',
+    	creditCard: '',
+    	userid: ''
+    }
 
+    $scope.account = $localStorage.getObject('user');
+
+    $scope.logout = function() {
+    	$localStorage.remove('token');
+    	$localStorage.remove('user');
+    	$localStorage.remove('packageType');
+    	$localStorage.remove('pacakgeInfo');
+    	$localStorage.remove('deliveryType');
+    	$localStorage.remove('deliveryInfo');
+
+    	$ionicHistory.nextViewOptions({
+	        historyRoot: true,
+	        disableAnimate: true,
+	        disableBack: true
+	    });
+
+	    $state.go('app.login');
+    };
   });
