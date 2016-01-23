@@ -14,7 +14,7 @@ angular.module('MyApp')
     })
     .state('app.login', {
       url: '/login',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/login.html',
@@ -24,7 +24,7 @@ angular.module('MyApp')
     })
     .state('app.register', {
       url: '/register',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/register.html',
@@ -34,7 +34,7 @@ angular.module('MyApp')
     })
     .state('app.home', {
       url: '/home',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/home.html',
@@ -42,18 +42,9 @@ angular.module('MyApp')
         }
       }
     })
-    // .state('app.home.tabs', {
-    //   url: '/tabs',
-    //   abstract: true,
-    //   views: {
-    //     'homeView@app.home': {
-    //       templateUrl: 'templates/views/tabs.html'
-    //     }
-    //   }
-    // })
     .state('app.package', {
       url: '/package',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/package.html',
@@ -63,7 +54,7 @@ angular.module('MyApp')
     })
     .state('app.detail', {
       url: '/detail',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/detail.html',
@@ -73,7 +64,7 @@ angular.module('MyApp')
     })
     .state('app.route', {
       url: '/route',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/route.html',
@@ -83,7 +74,7 @@ angular.module('MyApp')
     })
     .state('app.search', {
       url: '/search',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/search.html',
@@ -93,7 +84,7 @@ angular.module('MyApp')
     })
     .state('app.account', {
       url: '/account',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/account.html',
@@ -103,7 +94,7 @@ angular.module('MyApp')
     })
     .state('app.orders', {
       url: '/orders',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/orders.html',
