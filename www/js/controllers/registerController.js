@@ -17,16 +17,10 @@ angular.module('MyApp')
   			contact: ''
   		};
 
-  		$scope.userRegister = function() {
-  			$ionicHistory.nextViewOptions({
-		        historyRoot: true,
-		        disableAnimate: true,
-		        disableBack: true
-		    });
+  		function validateInfo() {
+  			var error_msg = '';
 
-		    var error_msg = '';
-
-		    if (!ValidationService.isEmail($scope.registration.email)) {
+  			if (!ValidationService.isEmail($scope.registration.email)) {
 		    	error_msg = 'Please enter a valid email address!';
 		    } else if (ValidationService.isEmpty($scope.registration.name)) {
 		    	error_msg = 'Please enter a valid name!';
@@ -37,8 +31,22 @@ angular.module('MyApp')
 		    } else if (ValidationService.isEmpty($scope.registration.contact)) {
 		    	error_msg = 'Please enter a valid contact number!';
 		    } else if (!ValidationService.isEqual($scope.registration.password, $scope.registration.repassword)) {
-		    	error_msg = 'Two passwords are not the same!'
+		    	error_msg = 'Two passwords are not the same!';
+		    } else {
+		    	error_msg = '';
 		    }
+
+		    return error_msg;
+  		}
+
+  		$scope.userRegister = function() {
+  			$ionicHistory.nextViewOptions({
+		        historyRoot: true,
+		        disableAnimate: true,
+		        disableBack: true
+		    });
+
+		    var error_msg = validateInfo();
 
 		    if (error_msg === '') {
 				UserService.register($scope.registration.email, $scope.registration.password, $scope.registration.name, $scope.registration.contact)

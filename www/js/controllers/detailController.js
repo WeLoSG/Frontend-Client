@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   .controller('DetailController', function($scope, $state, $ionicHistory,
-    $sessionStorage, $ionicPopup) {
+    $sessionStorage, $ionicPopup, ValidationService) {
 
     $scope.packageInfo = {
       recipientName: '',
@@ -21,14 +21,14 @@ angular.module('MyApp')
     $scope.packageType = ' ' + $sessionStorage.get('packageType') +
       ' package';
 
-    function checkMissingField() {
-      if ($scope.packageInfo.recipientName == '') {
+    function validateInfo() {
+      if (ValidationService.isEmpty($scope.packageInfo.recipientName)) {
         return 'recipient name';
-      } else if ($scope.packageInfo.recipientContact == '') {
+      } else if (ValidationService.isEmpty($scope.packageInfo.recipientContact)) {
         return 'recipient contact';
-      } else if ($scope.packageInfo.weight == '') {
+      } else if (ValidationService.isEmpty($scope.packageInfo.weight)) {
         return 'weight';
-      } else if ($scope.packageInfo.pickUpTime == '') {
+      } else if (ValidationService.isEmpty($scope.packageInfo.pickUpTime)) {
         return 'pick up time';
       } else {
         return '';
@@ -36,7 +36,7 @@ angular.module('MyApp')
     }
 
     $scope.goToRoutePage = function() {
-      var validationResult = checkMissingField();
+      var validationResult = validateInfo();
       if (validationResult == '') {
         $sessionStorage.setObject('packageInfo', this.packageInfo);
         $state.go('app.route');

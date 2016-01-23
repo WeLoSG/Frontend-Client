@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   .controller('RouteController', function($scope, $ionicLoading, socket,
-    $sessionStorage, $ionicHistory, $state, MapService, $ionicPopup) {
+    $sessionStorage, $ionicHistory, $state, MapService, $ionicPopup, ValidationService) {
 
     $scope.deliveryInfo = {
       from: '',
@@ -91,14 +91,14 @@ angular.module('MyApp')
       });
     }
 
-    function checkMissingField() {
-      if ($scope.deliveryInfo.from === '') {
+    function validateInfo() {
+      if (ValidationService.isEmpty($scope.deliveryInfo.from)) {
         return 'pick up place';
-      } else if ($scope.deliveryInfo.to === '') {
-        return 'destination';
-      } else if ($scope.deliveryInfo.fare === '') {
-        return 'est. fare';
-      } else if ($scope.deliveryInfo.payment === '') {
+      } else if (ValidationService.isEmpty($scope.deliveryInfo.to)) {
+        return 'destination place';
+      } else if (ValidationService.isEmpty($scope.deliveryInfo.fare)) {
+        return 'estimated fare';
+      } else if (ValidationService.isEmpty($scope.deliveryInfo.payment)) {
         return 'payment mode';
       } else {
         return '';
@@ -165,7 +165,7 @@ angular.module('MyApp')
     };
 
     $scope.goToSearchPage = function() {
-      var validationResult = checkMissingField();
+      var validationResult = validateInfo();
 
       if (validationResult == '') {
         $scope.deliveryInfo.from = document.getElementById('from-address').value;
