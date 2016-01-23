@@ -15,7 +15,7 @@ angular.module('MyApp')
         disableAnimate: true,
         disableBack: true
       });
-      if (!$localStorage.get('token')) {
+      if (!$localStorage.get('token') && !$state.includes("app.register") && !$state.includes("app.login")) {
         $state.go('app.login');
       }
     });
