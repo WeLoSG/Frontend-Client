@@ -15,7 +15,7 @@ angular.module('MyApp')
       });
     };
 
-    var registerUser = function(email, name, password, contact) {
+    var registerUser = function(email, password, name, contact) {
       return $http({
         url: ApiService.getEndpoint() + '/users',
         data: {
