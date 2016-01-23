@@ -38,4 +38,11 @@ angular.module('MyApp')
 
       $state.go('app.package');
     };
+
+    $scope.$on('$ionicView.enter', function() {
+      $localStorage.remove('packageType');
+      $localStorage.remove('deliveryType');
+      $localStorage.remove('deliveryInfo');
+      $localStorage.remove('packageInfo');
+    });
   });

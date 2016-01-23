@@ -25,4 +25,10 @@ angular.module('MyApp')
 
       $state.go('app.detail');
     };
+
+    $scope.$on('$ionicView.enter', function() {
+      $localStorage.remove('packageType');
+      $localStorage.remove('deliveryInfo');
+      $localStorage.remove('packageInfo');
+    });
   });

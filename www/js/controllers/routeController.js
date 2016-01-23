@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   .controller('RouteController', function($scope, $ionicLoading, socket,
-    $localStorage, $ionicHistory, $state, LocationService, MapService,
+    $localStorage, $ionicHistory, $state, LocationService,
     $ionicPopup) {
 
     $scope.deliveryInfo = {
@@ -35,7 +35,7 @@ angular.module('MyApp')
       }
       var postalCode = deliveryInfo.postal;
 
-      if (postalCode.toString().length !== 6) {
+      if (!postalCode || postalCode.toString().length !== 6) {
         if (id === 'from') {
           $scope.isShowFromAddressDetail = false;
         } else {
@@ -45,6 +45,10 @@ angular.module('MyApp')
         $ionicLoading.show();
         LocationService.getGeoDataForPostalCode(postalCode, function(data) {
           if (data.code !== 200) {
+            var alertPopup = $ionicPopup.alert({
+              title: 'Wrong Postal Code',
+              template: 'Please check your entered postal code.'
+            });
             if (id === 'from') {
               $scope.isShowFromAddressDetail = false;
             } else {
@@ -132,7 +136,7 @@ angular.module('MyApp')
         .to.street) {
         return 'destination';
       } else if (!$scope.deliveryInfo.fare) {
-        return 'est. fare';
+        return 'estimated fare';
       } else if (!$scope.deliveryInfo.payment) {
         return 'payment mode';
       } else {

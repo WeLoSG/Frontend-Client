@@ -8,7 +8,8 @@
  */
 angular.module('MyApp')
   .controller('DetailController', function($scope, $state, $ionicHistory,
-    $localStorage, $ionicPopup) {
+    $localStorage, $ionicPopup, ValidationService) {
+
 
     var defaultPackageInfo = {
       recipientName: '',
@@ -21,17 +22,22 @@ angular.module('MyApp')
     $scope.packageInfo = $localStorage.getObject('packageInfo',
       defaultPackageInfo);
 
+    $scope.$on('$ionicView.beforeEnter', function() {
+      $scope.packageInfo = $localStorage.getObject('packageInfo',
+        defaultPackageInfo);
+    });
+
     $scope.packageType = ' ' + $localStorage.get('packageType') +
       ' package';
 
-    function checkMissingField() {
-      if ($scope.packageInfo.recipientName == '') {
+    function validateInfo() {
+      if (ValidationService.isEmpty($scope.packageInfo.recipientName)) {
         return 'recipient name';
-      } else if ($scope.packageInfo.recipientContact == '') {
+      } else if (ValidationService.isEmpty($scope.packageInfo.recipientContact)) {
         return 'recipient contact';
-      } else if ($scope.packageInfo.weight == '') {
+      } else if (ValidationService.isEmpty($scope.packageInfo.weight)) {
         return 'weight';
-      } else if ($scope.packageInfo.pickUpTime == '') {
+      } else if (ValidationService.isEmpty($scope.packageInfo.pickUpTime)) {
         return 'pick up time';
       } else {
         return '';
@@ -39,8 +45,8 @@ angular.module('MyApp')
     }
 
     $scope.goToRoutePage = function() {
-      var validationResult = checkMissingField();
-      if (validationResult == '') {
+      var validationResult = validateInfo();
+      if (validationResult === '') {
         $localStorage.setObject('packageInfo', $scope.packageInfo);
         $state.go('app.route');
       } else {
@@ -53,4 +59,5 @@ angular.module('MyApp')
         });
       }
     };
+
   });
