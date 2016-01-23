@@ -17,9 +17,20 @@ angular.module('MyApp')
       });
     };
 
+    var getOrders = function() {
+      return $http({
+        url: ApiService.getEndpoint() + '/orders/client',
+        params: {
+          welo_token: token
+        },
+        method: 'GET'
+      });
+    };
+
     // public api
     return {
-      createOrder: createOrder
+      createOrder: createOrder,
+      getOrders: getOrders
     };
 
   });
