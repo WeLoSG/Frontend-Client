@@ -16,7 +16,7 @@
 			<div class="item item-divider">Remarks</div>
 			<div class="item item-text-wrap">{{remarks}}</div>
 			<div class="item item-divider">Weight</div>
-			<div class="item item-text-wrap">{{weight}}</div>
+			<div class="item item-text-wrap">{{weight}} KG</div>
 			<div class="item item-divider">Pick Up Time</div>
 			<div class="item item-text-wrap">{{pickUpTime}}</div>
 		</div>
@@ -27,9 +27,17 @@
 			<div class="item item-divider">Delivery Type</div>
 			<div class="item item-text-wrap">{{deliveryType}}</div>
 			<div class="item item-divider">From</div>
-			<div class="item item-text-wrap">{{from}}</div>
+			<div class="item item-text-wrap">
+				<div>{{from.extra}}</div>
+				<div>{{from.street}}</div>
+				<div>{{from.postal}}</div>
+			</div>
 			<div class="item item-divider">To</div>
-			<div class="item item-text-wrap">{{to}}</div>
+			<div class="item item-text-wrap">
+				<div>{{to.extra}}</div>
+				<div>{{to.street}}</div>
+				<div>{{to.postal}}</div>
+			</div>
 			<div class="item item-divider">Fare</div>
 			<div class="item item-text-wrap">{{fare}}</div>
 			<div class="item item-divider">Promo. Code</div>
@@ -39,6 +47,6 @@
 		</div>
 
 		<button class="button button-block button-positive" ng-click="sendRequest()">Send Order</button>
-		<button class="button button-block button-assertive" ui-sref="app.route">Cancel</button>
+		<button class="button button-block button-assertive" ng-click="cancelOrder()">Cancel</button>
 	</ion-content>
 </ion-view>

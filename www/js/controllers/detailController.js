@@ -8,9 +8,9 @@
  */
 angular.module('MyApp')
   .controller('DetailController', function($scope, $state, $ionicHistory,
-    $sessionStorage, $ionicPopup) {
+    $localStorage, $ionicPopup) {
 
-    $scope.packageInfo = {
+    var defaultPackageInfo = {
       recipientName: '',
       recipientContact: '',
       remarks: '',
@@ -18,7 +18,10 @@ angular.module('MyApp')
       pickUpTime: ''
     };
 
-    $scope.packageType = ' ' + $sessionStorage.get('packageType') +
+    $scope.packageInfo = $localStorage.getObject('packageInfo',
+      defaultPackageInfo);
+
+    $scope.packageType = ' ' + $localStorage.get('packageType') +
       ' package';
 
     function checkMissingField() {
@@ -32,21 +35,21 @@ angular.module('MyApp')
         return 'pick up time';
       } else {
         return '';
-      } 
+      }
     }
 
     $scope.goToRoutePage = function() {
       var validationResult = checkMissingField();
       if (validationResult == '') {
-        $sessionStorage.setObject('packageInfo', this.packageInfo);
+        $localStorage.setObject('packageInfo', $scope.packageInfo);
         $state.go('app.route');
       } else {
         var alertPopup = $ionicPopup.alert({
           title: 'Missing Field!',
-          template: 'You have to enter the ' + validationResult +'!'
+          template: 'You have to enter the ' + validationResult + '!'
         });
         alertPopup.then(function(res) {
-          
+
         });
       }
     };

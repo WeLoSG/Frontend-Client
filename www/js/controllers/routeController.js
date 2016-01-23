@@ -8,139 +8,172 @@
  */
 angular.module('MyApp')
   .controller('RouteController', function($scope, $ionicLoading, socket,
-    $sessionStorage, $ionicHistory, $state, MapService, $ionicPopup) {
+    $localStorage, $ionicHistory, $state, LocationService, MapService,
+    $ionicPopup) {
 
     $scope.deliveryInfo = {
-      from: '',
-      to: '',
+      from: {},
+      to: {},
       fare: '',
       promocode: '',
-      payment: ''
+      payment: 'Credit Card'
     };
 
-    // Adds a marker to the map and push to the array.
-    function addMarker(location) {
-      var marker = new google.maps.Marker({
-        position: location,
-        map: $scope.map
-      });
-
-      // Add info window
-      var infoWindow = new google.maps.InfoWindow({
-        content: 'This is a new marker',
-        noSupress: true
-      });
-
-      marker.addListener('click', function() {
-        infoWindow.open($scope.map, marker);
-      });
+    var deliveryInfo = $localStorage.getObject('deliveryInfo');
+    if (Object.keys(deliveryInfo).length !== 0) {
+      $scope.deliveryInfo = deliveryInfo;
+      $scope.isShowFromAddressDetail = true;
+      $scope.isShowDeliverAddressDetail = true;
     }
 
-    function initAutoComplete(map, id) {
-      var input = document.getElementById(id);
-      var options = {
-        componentRestrictions: {
-          country: 'SG'
-        } //SG only
-      };
+    $scope.getAddressFromPostal = function(id) {
+      var deliveryInfo;
+      if (id === 'from') {
+        deliveryInfo = $scope.deliveryInfo.from;
+      } else {
+        deliveryInfo = $scope.deliveryInfo.to;
+      }
+      var postalCode = deliveryInfo.postal;
 
-      var autocomplete = new google.maps.places.Autocomplete(input, options);
-      autocomplete.bindTo('bounds', map);
-
-      var marker = new google.maps.Marker({
-        map: map,
-        anchorPoint: new google.maps.Point(0, -29)
-      });
-
-      autocomplete.addListener('place_changed', function(event) {
-        marker.setVisible(false);
-
-        // Get autocomplete address
-        var place = autocomplete.getPlace();
-
-        console.log(place.formatted_address);
-
-        if (!place.geometry) {
-          console.log(
-            'Autocomplete\'s returned place contains no geometry');
-          return;
-        }
-
-        if (place.geometry.viewport) {
-          map.fitBounds(place.geometry.viewport);
+      if (postalCode.toString().length !== 6) {
+        if (id === 'from') {
+          $scope.isShowFromAddressDetail = false;
         } else {
-          map.setCenter(place.geometry.location);
-          map.setZoom(17);
+          $scope.isShowDeliverAddressDetail = false;
         }
-        marker.setIcon({
-          url: place.icon,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(35, 35)
-        });
-        marker.setPosition(place.geometry.location);
-        marker.setVisible(true);
-        $scope.$apply(function() {
-          if (id === 'from-address') {
-            $scope.deliveryInfo.from = place.formatted_address;
-          } else if (id === 'to-address') {
-            $scope.deliveryInfo.to = place.formatted_address;
+      } else {
+        $ionicLoading.show();
+        LocationService.getGeoDataForPostalCode(postalCode, function(data) {
+          if (data.code !== 200) {
+            if (id === 'from') {
+              $scope.isShowFromAddressDetail = false;
+            } else {
+              $scope.isShowDeliverAddressDetail = false;
+            }
+          } else {
+            if (id === 'from') {
+              $scope.isShowFromAddressDetail = true;
+            } else {
+              $scope.isShowDeliverAddressDetail = true;
+            }
+            deliveryInfo.street = data.address;
+            deliveryInfo.geoLocation = data.geolocation;
+            deliveryInfo.extra = '';
           }
+          $ionicLoading.hide();
         });
-      });
-    }
+      }
+    };
+
+    // function initAutoComplete(map, id) {
+    //   var input = document.getElementById(id);
+    //   var options = {
+    //     componentRestrictions: {
+    //       country: 'SG'
+    //     } //SG only
+    //   };
+    //
+    //   var autocomplete = new google.maps.places.Autocomplete(input, options);
+    //   autocomplete.bindTo('bounds', map);
+    //
+    //   var marker = new google.maps.Marker({
+    //     map: map,
+    //     anchorPoint: new google.maps.Point(0, -29)
+    //   });
+    //
+    //   autocomplete.addListener('place_changed', function(event) {
+    //     marker.setVisible(false);
+    //
+    //     // Get autocomplete address
+    //     var place = autocomplete.getPlace();
+    //
+    //     console.log(place);
+    //     console.log(place.geometry.location.lat());
+    //     console.log(place.geometry.location.lng());
+    //
+    //     if (!place.geometry) {
+    //       console.log(
+    //         'Autocomplete\'s returned place contains no geometry');
+    //       return;
+    //     }
+    //
+    //     if (place.geometry.viewport) {
+    //       map.fitBounds(place.geometry.viewport);
+    //     } else {
+    //       map.setCenter(place.geometry.location);
+    //       map.setZoom(17);
+    //     }
+    //     marker.setIcon({
+    //       url: place.icon,
+    //       size: new google.maps.Size(71, 71),
+    //       origin: new google.maps.Point(0, 0),
+    //       anchor: new google.maps.Point(17, 34),
+    //       scaledSize: new google.maps.Size(35, 35)
+    //     });
+    //     marker.setPosition(place.geometry.location);
+    //     marker.setVisible(true);
+    //     $scope.$apply(function() {
+    //       if (id === 'from-address') {
+    //         $scope.deliveryInfo.from.postal = place.address_components[
+    //           0];
+    //         $scope.deliveryInfo.from = place.formatted_address;
+    //       } else if (id === 'to-address') {
+    //         $scope.deliveryInfo.to = place.formatted_address;
+    //       }
+    //     });
+    //   });
+    // }
 
     function checkMissingField() {
-      if ($scope.deliveryInfo.from === '') {
-        return 'pick up place';
-      } else if ($scope.deliveryInfo.to === '') {
+      if (!$scope.deliveryInfo.from.postal || !$scope.deliveryInfo.from
+        .street) {
+        return 'pick up address';
+      } else if (!$scope.deliveryInfo.to.postal || !$scope.deliveryInfo
+        .to.street) {
         return 'destination';
-      } else if ($scope.deliveryInfo.fare === '') {
+      } else if (!$scope.deliveryInfo.fare) {
         return 'est. fare';
-      } else if ($scope.deliveryInfo.payment === '') {
+      } else if (!$scope.deliveryInfo.payment) {
         return 'payment mode';
       } else {
         return '';
       }
     }
 
-    $scope.initMap = function(map) {
-      $scope.map = map;
-
-      if (!$scope.map) {
-        return;
-      }
-
-      $scope.loading = $ionicLoading.show({
-        template: 'Getting current location'
-      });
-
-      navigator.geolocation.getCurrentPosition(function(pos) {
-        var myLocation = new google.maps.LatLng(pos.coords.latitude,
-          pos.coords.longitude);
-        $scope.map.setCenter({
-          lat: myLocation.lat(),
-          lng: myLocation.lng()
-        });
-        $scope.map.setZoom(14);
-
-        addMarker(myLocation);
-
-        var LatLng = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        };
-
-        $ionicLoading.hide();
-      }, function(error) {
-        console.log('Unable to get location: ' + error.message);
-        $ionicLoading.hide();
-      });
-
-      initAutoComplete(map, 'from-address');
-      initAutoComplete(map, 'to-address');
-    };
+    // $scope.initMap = function(map) {
+    //   $scope.map = map;
+    //
+    //   if (!$scope.map) {
+    //     return;
+    //   }
+    //
+    //   $scope.loading = $ionicLoading.show({
+    //     template: 'Checking location...'
+    //   });
+    //
+    //   navigator.geolocation.getCurrentPosition(function(pos) {
+    //     var myLocation = new google.maps.LatLng(pos.coords.latitude,
+    //       pos.coords.longitude);
+    //     $scope.map.setCenter({
+    //       lat: myLocation.lat(),
+    //       lng: myLocation.lng()
+    //     });
+    //     $scope.map.setZoom(14);
+    //
+    //     var LatLng = {
+    //       lat: pos.coords.latitude,
+    //       lng: pos.coords.longitude
+    //     };
+    //
+    //     $ionicLoading.hide();
+    //   }, function(error) {
+    //     console.log('Unable to get location: ' + error.message);
+    //     $ionicLoading.hide();
+    //   });
+    //
+    //   initAutoComplete(map, 'from-address');
+    //   initAutoComplete(map, 'to-address');
+    // };
 
     $scope.disableTap = function() {
       var container = document.getElementsByClassName('pac-container');
@@ -152,26 +185,11 @@ angular.module('MyApp')
       });
     };
 
-    $scope.getAddressForFrom = function() {
-      MapService.getLatLngFromPostcode($scope.map, $scope.deliveryInfo.from,
-        MapService.getAddressFromLatLng);
-      // Fill the input of from-address
-    };
-
-    $scope.getAddressForTo = function() {
-      MapService.getLatLngFromPostcode($scope.map, $scope.deliveryInfo.from,
-        MapService.getAddressFromLatLng);
-      // Fill the input of to-address
-    };
-
     $scope.goToSearchPage = function() {
       var validationResult = checkMissingField();
 
-      if (validationResult == '') {
-        $scope.deliveryInfo.from = document.getElementById('from-address').value;
-        $scope.deliveryInfo.to = document.getElementById('to-address').value;
-
-        $sessionStorage.setObject('deliveryInfo', this.deliveryInfo);
+      if (validationResult === '') {
+        $localStorage.setObject('deliveryInfo', $scope.deliveryInfo);
         $state.go('app.search');
       } else {
         var alertPopup = $ionicPopup.alert({
@@ -182,7 +200,6 @@ angular.module('MyApp')
 
         });
       }
-
     };
 
     // Socket

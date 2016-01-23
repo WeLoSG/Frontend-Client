@@ -113,5 +113,5 @@ angular.module('MyApp')
     });
 
   // redirects to default route for undefined routes
-  $urlRouterProvider.otherwise('/app/login');
+  $urlRouterProvider.otherwise('/app/home');
 });

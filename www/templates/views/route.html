@@ -10,38 +10,70 @@
 
 	<ion-content class="route-main padding">
 		<ion-list class="list-inset">
-			<ion-item class="item-icon-left">
+			<div class="item item-divider">
+				Pick up address
+			</div>
+			<div class="item item-text-wrap">
+				<label class="item item-input">
+	    			<input type="number" placeholder="Postal code" ng-change="getAddressFromPostal('from')" ng-model-options="{updateOn: 'blur'}" ng-model="deliveryInfo.from.postal" required>
+	  		</label>
+			</div>
+			<div ng-if="isShowFromAddressDetail">
+				<div class="item item-text-wrap">
+					<label class="item item-input">
+		    			<input type="text" placeholder="Address" ng-model="deliveryInfo.from.street" required>
+		  		</label>
+				</div>
+				<div class="item item-text-wrap">
+					<label class="item item-input">
+		    			<input type="text" placeholder="Unit / Place (optional)" ng-model="deliveryInfo.from.extra">
+		  		</label>
+				</div>
+			</div>
+			<div class="item item-divider">
+				Deliver Address
+			</div>
+			<div class="item item-text-wrap">
+				<label class="item item-input">
+	    			<input type="number" placeholder="Postal code" ng-change="getAddressFromPostal('to')" ng-model-options="{updateOn: 'blur'}" ng-model="deliveryInfo.to.postal" required>
+	  		</label>
+			</div>
+			<div ng-if="isShowDeliverAddressDetail">
+				<div class="item item-text-wrap">
+					<label class="item item-input">
+		    			<input type="text" placeholder="Address" ng-model="deliveryInfo.to.street" required>
+		  		</label>
+				</div>
+				<div class="item item-text-wrap">
+					<label class="item item-input">
+		    			<input type="text" placeholder="Unit / Place name (optional)" ng-model="deliveryInfo.to.extra">
+		  		</label>
+				</div>
+			</div>
+			<!-- <ion-item class="item-icon-left">
 				<i class="icon ion-ios-location"></i>
 				<label class="item item-input">
-	    			<input id="from-address" type="text" placeholder="Pick up from" ng-focus="disableTap()" ng-model="deliveryInfo.from">
+	    			<input id="to-address" type="text" placeholder="Destination">
 	  		</label>
-        <!-- <button class="button button-block button-calm ion-search" ng-click="getAddressForFrom()"></button> -->
-			</ion-item>
-			<ion-item class="item-icon-left">
-				<i class="icon ion-ios-location"></i>
-				<label class="item item-input">
-	    			<input id="to-address" type="text" placeholder="Destination" ng-focus="disableTap()" ng-model="deliveryInfo.to">
-	  		</label>
-        <!-- <button class="button button-block button-calm ion-search" ng-click="getAddressForTo()"></button> -->
-			</ion-item>
-		</ion-list>
-		<map id="map" on-create="initMap(map)"></map>
-		<ion-list class="list-inset">
+			</ion-item> -->
+			<div class="item item-divider">
+				Payment
+			</div>
     		<div class="item item-icon-left">
     			<i class="icon ion-bookmark"></i>
-    			<input type="text" placeholder="Est. Fare" ng-model="deliveryInfo.fare">
+    			<input type="text" placeholder="Est. Fare (SGD)" ng-model="deliveryInfo.fare" required>
   			</div>
   			<div class="item item-icon-left">
   				<i class="icon ion-help-buoy"></i>
-    			<input type="text" placeholder="Promo Code" ng-model="deliveryInfo.promocode">
+    			<input type="text" placeholder="Promo Code" ng-model="deliveryInfo.promocode" required>
   			</div>
   			<div class="item item-icon-left  item-select">
 					<i class="icon ion-calculator"></i>
           <div class="input-label">Payment Mode</div>
           <select ng-model="deliveryInfo.payment">
-            <option>Credit Crad</option>
-            <option>Paypal</option>
-            <option>Cash</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Paypal">Paypal</option>
+            <option value="Cash">Cash</option>
           </select>
 
   			</div>

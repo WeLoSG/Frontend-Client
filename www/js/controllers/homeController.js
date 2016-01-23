@@ -8,16 +8,22 @@
  */
 angular.module('MyApp')
   .controller('HomeController', function($scope, $state, $ionicHistory,
-    $sessionStorage) {
+    $localStorage) {
+
     function setDeliveryTypeToImmediate() {
-      $sessionStorage.set('deliveryType', 'immediate');
+      $localStorage.set('deliveryType', 'immediate');
     }
 
     function setDeliveryTypeToExpress() {
-      $sessionStorage.set('deliveryType', 'express');
+      $localStorage.set('deliveryType', 'express');
     }
 
     $scope.goToPackagePage = function(deliveryType) {
+      $localStorage.remove('packageType');
+      $localStorage.remove('deliveryType');
+      $localStorage.remove('deliveryInfo');
+      $localStorage.remove('packageInfo');
+
       $ionicHistory.nextViewOptions({
         disableBack: true,
         disableAnimate: true,
