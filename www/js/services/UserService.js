@@ -15,9 +15,26 @@ angular.module('MyApp')
       });
     };
 
+    var registerUser = function(email, name, password, contact) {
+      return $http({
+        url: ApiService.getEndpoint() + '/users',
+        data: {
+          user: {
+            email: email,
+            name: name,
+            password: CryptoJS.SHA1(password).toString(),
+            phone: contact,
+            isDriver: false
+          }
+        },
+        method: 'POST'
+      });
+    };
+
     // public api
     return {
-      login: loginUser
+      login: loginUser,
+      register: registerUser
     };
 
   });
