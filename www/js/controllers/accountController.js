@@ -7,7 +7,7 @@
  * # AccountController
  */
 angular.module('MyApp')
-  .controller('AccountController', function($scope, $localStorage, $ionicHistory) {
+  .controller('AccountController', function($scope, $localStorage, $ionicHistory, $state) {
     $scope.account = {
     	email: '',
     	name: '',
@@ -15,8 +15,6 @@ angular.module('MyApp')
     	creditCard: '',
     	userid: ''
     }
-
-    $scope.account = $localStorage.getObject('user');
 
     $scope.logout = function() {
     	$localStorage.remove('token');
@@ -34,4 +32,8 @@ angular.module('MyApp')
 
 	    $state.go('app.login');
     };
+
+    $scope.$on('$ionicView.enter', function() {
+      $scope.account = $localStorage.getObject('user');
+    });
   });

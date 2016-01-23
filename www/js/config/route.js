@@ -101,6 +101,16 @@ angular.module('MyApp')
         }
       }
     })
+    .state('app.orders', {
+      url: '/orders',
+      cache: true,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/orders.html',
+          controller: 'OrdersController'
+        }
+      }
+    })
     .state('app.settings', {
       url: '/settings',
       cache: true,
