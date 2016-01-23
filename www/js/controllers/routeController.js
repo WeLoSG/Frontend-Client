@@ -46,16 +46,13 @@ angular.module('MyApp')
 
       var autocomplete = new google.maps.places.Autocomplete(input, options);
       autocomplete.bindTo('bounds', map);
-      autocomplete.setTypes(['geocode']);
 
-      // var infowindow = new google.maps.InfoWindow();
       var marker = new google.maps.Marker({
         map: map,
         anchorPoint: new google.maps.Point(0, -29)
       });
 
       autocomplete.addListener('place_changed', function(event) {
-        // infowindow.close();
         marker.setVisible(false);
 
         // Get autocomplete address
@@ -64,7 +61,8 @@ angular.module('MyApp')
         console.log(place.formatted_address);
 
         if (!place.geometry) {
-          console.log('Autocomplete\'s returned place contains no geometry');
+          console.log(
+            'Autocomplete\'s returned place contains no geometry');
           return;
         }
 
@@ -83,28 +81,24 @@ angular.module('MyApp')
         });
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
-
-        // Set the input to formatted address manually
-        setTimeout(function() {
-          if (id == 'from-address') {
+        $scope.$apply(function() {
+          if (id === 'from-address') {
             $scope.deliveryInfo.from = place.formatted_address;
-            document.getElementById(id).focus();
-          } else if (id == 'to-address') {
+          } else if (id === 'to-address') {
             $scope.deliveryInfo.to = place.formatted_address;
-            document.getElementById(id).focus();
           }
-        }, 0);
+        });
       });
     }
 
     function checkMissingField() {
-      if ($scope.deliveryInfo.from == '') {
+      if ($scope.deliveryInfo.from === '') {
         return 'pick up place';
-      } else if ($scope.deliveryInfo.to == '') {
+      } else if ($scope.deliveryInfo.to === '') {
         return 'destination';
-      } else if ($scope.deliveryInfo.fare == '') {
+      } else if ($scope.deliveryInfo.fare === '') {
         return 'est. fare';
-      } else if ($scope.deliveryInfo.payment == '') {
+      } else if ($scope.deliveryInfo.payment === '') {
         return 'payment mode';
       } else {
         return '';
@@ -182,13 +176,13 @@ angular.module('MyApp')
       } else {
         var alertPopup = $ionicPopup.alert({
           title: 'Missing Field!',
-          template: 'You have to enter the ' + validationResult +'!'
+          template: 'You have to enter the ' + validationResult + '!'
         });
         alertPopup.then(function(res) {
-          
+
         });
       }
-      
+
     };
 
     // Socket

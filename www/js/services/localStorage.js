@@ -7,7 +7,7 @@
  * # $localstorage
  */
 angular.module('MyApp')
-  .factory('$localstorage', function($window) {
+  .factory('$localStorage', function($window) {
     return {
       set: function(key, value) {
         $window.localStorage[key] = value;

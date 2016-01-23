@@ -1,10 +1,9 @@
 <ion-view>
     <ion-header-bar align-title="center" class="bar-positive">
-    	<button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
     </ion-header-bar>
-	<ion-content class="home-sub-header padding">
-		<div class="home-main">
-			<div class="home-main-title">
+	<ion-content class="login-main padding">
+		<div class="login-sub-header">
+			<div class="login-main-title">
 				<i class="icon ion-android-car title-icon"></i>
 				<br>
 				Crowdsourced Logistic
@@ -13,20 +12,21 @@
 		<ion-list class="list-inset">
     		<div class="item item item-icon-left">
     			<i class="icon ion-email"></i>
-    			<input type="text" placeholder="Email Address">
+    			<input type="text" placeholder="Email Address" ng-model="credential.email">
   			</div>
   			<div class="item item item-icon-left">
   				<i class="icon ion-locked"></i>
-    			<input type="password" placeholder="Password">
+    			<input type="password" placeholder="Password" ng-model="credential.password">
   			</div>
 		</ion-list>
-		<br/>
-		<button class="button button-block button-calm">SIGN IN</button>
-		<button class="button button-block button-dark">Forget Password</button>
-		<hr/>
-		<br/>
-		<p><a class="button icon-left ion-social-facebook button-royal">&nbsp;&nbsp;Login with Facebook</a></p>
-		<br>
-		<p><a class="button icon-right ion-chevron-right button-dark" ui-sref="app.register">Register Now&nbsp;&nbsp;</a></p>
+    <div class="button-full-group">
+      <button class="button button-block button-calm" ng-click="userLogin()">SIGN IN</button>
+  		<button class="button button-block button-dark">Forget Password</button>
+    </div>
+    <hr>
+    <div class="button-group">
+      <div><a class="button icon-left ion-social-facebook button-royal">Login with Facebook</a></div>
+      <div><a class="button icon-right ion-chevron-right button-dark" ui-sref="app.register">Register Now</a></div>
+    </div>
 	</ion-content>
 </ion-view>

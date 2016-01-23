@@ -29,4 +29,14 @@
 	    	}
   		}
 	}
+
+	.button-full-group {
+
+	}
+
+	.button-group {
+		&> div {
+			margin: 10px;
+		}
+	}
 }
