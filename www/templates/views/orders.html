@@ -5,7 +5,8 @@
   </ion-header-bar>
 
   <ion-content class="orders-main">
-    <div class="card" ng-repeat="order in orders" ng-click="goToOrderDetailPage($index)">
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="getOrders()"></ion-refresher>
+    <div class="card" ng-repeat="order in orders">
       <div class="item item-divider">
         <div class="row">
           <div class="title item-icon-left">
@@ -19,12 +20,13 @@
       </div>
       <ion-list>
         <ion-item><strong>Package Type: </strong>{{order.category}}</ion-item>
+        <ion-item><strong>Delivery Status: </strong>{{order.currentStatus}}</ion-item>
         <ion-item><strong>From: </strong>{{order.fromAddress.street}}, {{order.fromAddress.postal}}</ion-item>
         <ion-item><strong>To: </strong>{{order.toAddress.street}}, {{order.toAddress.postal}}</ion-item>
       </ion-list>
       <div class="item item-divider">
         <div class="button-bar">
-          <button class="button button-positive icon ion-search"></button>
+          <button class="button button-positive icon ion-search" ng-click="goToOrderDetailPage($index)"></button>
           <button class="button button-assertive icon ion-close-round"></button>
         </div>
       </div>

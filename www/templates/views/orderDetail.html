@@ -5,6 +5,7 @@
   </ion-header-bar>
 
   <ion-content class="order-detail-main">
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="getOrder()"></ion-refresher>
     <div class="card">
       <div class="item item-divider">
         <div class="row">
@@ -23,7 +24,7 @@
         <ion-item class="item-text-wrap"><strong>Recipient Contact: </strong>{{selectedOrder.recipientContact}}</ion-item>
         <ion-item class="item-text-wrap"><strong>Fare: </strong>{{selectedOrder.amount}} SGD</ion-item>
         <ion-item class="item-text-wrap"><strong>Remarks: </strong>{{selectedOrder.comments}}</ion-item>
-        <ion-item class="item-text-wrap"><strong>Status: </strong>{{selectedOrder.status}}</ion-item>
+        <ion-item class="item-text-wrap"><strong>Status: </strong>{{selectedOrder.currentStatus}}</ion-item>
         <ion-item class="item-text-wrap"><strong>From: </strong>{{selectedOrder.fromAddress.street}}, {{selectedOrder.fromAddress.postal}}</ion-item>
         <ion-item class="item-text-wrap"><strong>To: </strong>{{selectedOrder.toAddress.street}}, {{selectedOrder.toAddress.postal}}</ion-item>
       </ion-list>
