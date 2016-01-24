@@ -10,7 +10,7 @@
       <div class="item item-divider">
         <div class="row">
           <div class="title item-icon-left">
-            <i class="icon ion-cube"></i>
+            <i class="icon" ng-class="{'ion-clock' : selectedOrder.status < 1, 'ion-forward' : selectedOrder.status == 1, 'ion-log-out' : selectedOrder.status == 2, 'ion-checkmark-round' : selectedOrder.status > 2}"></i>
             <strong>Order ID:&nbsp;</strong>
           </div>
           <div class="order-id ">
@@ -24,7 +24,7 @@
         <ion-item class="item-text-wrap"><strong>Recipient Contact: </strong>{{selectedOrder.recipientContact}}</ion-item>
         <ion-item class="item-text-wrap"><strong>Fare: </strong>{{selectedOrder.amount}} SGD</ion-item>
         <ion-item class="item-text-wrap"><strong>Remarks: </strong>{{selectedOrder.comments}}</ion-item>
-        <ion-item class="item-text-wrap"><strong>Status: </strong>{{selectedOrder.currentStatus}}</ion-item>
+        <ion-item class="item-text-wrap"><strong>Order Status: </strong><span ng-class="{'status-red' : selectedOrder.status < 1, 'status-orange' : selectedOrder.status == 1, 'status-yellow' : selectedOrder.status == 2, 'status-green' : selectedOrder.status > 2}">{{selectedOrder.currentStatus}}</span></ion-item>
         <ion-item class="item-text-wrap"><strong>From: </strong>{{selectedOrder.fromAddress.street}}, {{selectedOrder.fromAddress.postal}}</ion-item>
         <ion-item class="item-text-wrap"><strong>To: </strong>{{selectedOrder.toAddress.street}}, {{selectedOrder.toAddress.postal}}</ion-item>
       </ion-list>

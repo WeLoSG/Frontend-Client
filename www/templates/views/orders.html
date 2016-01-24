@@ -10,7 +10,7 @@
       <div class="item item-divider">
         <div class="row">
           <div class="title item-icon-left">
-            <i class="icon ion-cube"></i>
+            <i class="icon" ng-class="{'ion-clock' : order.status < 1, 'ion-forward' : order.status == 1, 'ion-log-out' : order.status == 2, 'ion-checkmark-round' : order.status > 2}"></i>
             <strong>Order ID:&nbsp;</strong>
           </div>
           <div class="order-id ">
@@ -20,7 +20,7 @@
       </div>
       <ion-list>
         <ion-item><strong>Package Type: </strong>{{order.category}}</ion-item>
-        <ion-item><strong>Delivery Status: </strong>{{order.currentStatus}}</ion-item>
+        <ion-item><strong>Order Status: </strong><span ng-class="{'status-red' : order.status < 1, 'status-orange' : order.status == 1, 'status-yellow' : order.status == 2, 'status-green' : order.status > 2}">{{order.currentStatus}}</span></ion-item>
         <ion-item><strong>From: </strong>{{order.fromAddress.street}}, {{order.fromAddress.postal}}</ion-item>
         <ion-item><strong>To: </strong>{{order.toAddress.street}}, {{order.toAddress.postal}}</ion-item>
       </ion-list>
