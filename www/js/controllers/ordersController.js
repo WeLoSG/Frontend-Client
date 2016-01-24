@@ -41,7 +41,7 @@ angular.module('MyApp')
       $ionicHistory.nextViewOptions({
         disableAnimate: false,
         disableBack: false,
-        historyRoot: false
+        historyRoot: true
       });
       $state.go('app.orderDetail');
     };
