@@ -53,11 +53,33 @@ angular.module('MyApp')
       }
     };
 
+    var getPackageTypeName = function(type) {
+      if (type === 'document') {
+        return 'Document';
+      } else if (type === 'small') {
+        return 'Small Parcel';
+      } else if (type === 'medium') {
+        return 'Medium Parcel';
+      } else if (type === 'large') {
+        return 'Large Parcel';
+      }
+    };
+
+    var getDeliveryTypeName = function(type) {
+      if (type === 'immediate') {
+        return 'Immediate Delivery';
+      } else if (type === 'express') {
+        return 'Express Delivery';
+      }
+    };
+
     // public api
     return {
       getStatus: getStatus,
       getOrderType: getOrderType,
       createOrder: createOrder,
+      getPackageTypeName: getPackageTypeName,
+      getDeliveryTypeName: getDeliveryTypeName,
       getOrders: getOrders
     };
 

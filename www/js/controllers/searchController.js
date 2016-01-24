@@ -3,7 +3,9 @@ angular.module('MyApp')
     $localStorage, OrderService, $ionicPopup, $state, $ionicHistory,
     $ionicLoading) {
     $scope.packageType = $localStorage.get('packageType');
+    $scope.packageTypeName = OrderService.getPackageTypeName($scope.packageType);
     $scope.deliveryType = $localStorage.get('deliveryType');
+    $scope.deliveryTypeName = OrderService.getDeliveryTypeName($scope.deliveryType);
 
     var packageInfo = $localStorage.getObject('packageInfo');
     $scope.recipientName = packageInfo.recipientName;
