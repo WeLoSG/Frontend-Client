@@ -3,10 +3,10 @@
         <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
         <h1 class="title">CONFIRM ORDER</h1>
   	</ion-header-bar>
-	<ion-content class="route-main padding">
+	<ion-content class="search-main padding">
 		<!--Package Info-->
 		<div class="list card">
-			<div class="item item-divider center-text">Package Info</div>
+			<div class="item item-divider center-text info-title">Package Info</div>
 			<div class="item item-divider">Package Type</div>
 			<div class="item item-text-wrap">{{packageType}}</div>
 			<div class="item item-divider">Recipient Name</div>
@@ -25,7 +25,7 @@
 
 		<!--Delivery Info-->
 		<div class="list card">
-			<div class="item item-divider center-text">Delivery Info</div>
+			<div class="item item-divider center-text info-title">Delivery Info</div>
 			<div class="item item-divider">Delivery Type</div>
 			<div class="item item-text-wrap">{{deliveryType}}</div>
 			<div class="item item-divider">From</div>
@@ -41,7 +41,7 @@
 				<div>{{to.postal}}</div>
 			</div>
 			<div class="item item-divider">Fare</div>
-			<div class="item item-text-wrap">{{fare}}</div>
+			<div class="item item-text-wrap">{{fare}} SGD</div>
 			<div class="item item-divider">Promo. Code</div>
 			<div class="item item-text-wrap">{{promocode}}</div>
 			<div class="item item-divider">Payment Mode</div>

@@ -1,10 +1,10 @@
 .orders-main {
 	.ion-clock {
-		color: #B01522;
+		color: #FF7043;
 	}
 
 	.ion-forward {
-		color: #FDAF0B;
+		color: #FFB74D;
 	}
 
 	.ion-log-out {
@@ -29,5 +29,10 @@
 
 	.status-green {
 		color: #7DBF31;
+	}
+
+	.order-title {
+		background: $positive;
+		color: white;
 	}
 }

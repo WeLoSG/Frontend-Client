@@ -7,7 +7,7 @@
   <ion-content class="orders-main">
     <ion-refresher pulling-text="Pull to refresh" on-refresh="getOrders()"></ion-refresher>
     <div class="card" ng-repeat="order in orders">
-      <div class="item item-divider">
+      <div class="item item-divider order-title">
         <div class="row">
           <div class="title item-icon-left">
             <i class="icon" ng-class="{'ion-clock' : order.status < 1, 'ion-forward' : order.status == 1, 'ion-log-out' : order.status == 2, 'ion-checkmark-round' : order.status > 2}"></i>
