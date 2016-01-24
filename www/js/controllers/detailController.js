@@ -16,6 +16,7 @@ angular.module('MyApp')
       recipientContact: '',
       remarks: '',
       weight: '',
+      pickUpDate: '',
       pickUpTime: ''
     };
 
@@ -37,6 +38,8 @@ angular.module('MyApp')
         return 'recipient contact';
       } else if (ValidationService.isEmpty($scope.packageInfo.weight)) {
         return 'weight';
+      } else if (ValidationService.isEmpty($scope.packageInfo.pickUpDate)) {
+        return 'pick up date';
       } else if (ValidationService.isEmpty($scope.packageInfo.pickUpTime)) {
         return 'pick up time';
       } else {

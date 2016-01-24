@@ -10,6 +10,7 @@ angular.module('MyApp')
     $scope.recipientContact = packageInfo.recipientContact;
     $scope.remarks = packageInfo.remarks || '';
     $scope.weight = packageInfo.weight;
+    $scope.pickUpDate = packageInfo.pickUpDate;
     $scope.pickUpTime = packageInfo.pickUpTime;
 
     var deliveryInfo = $localStorage.getObject('deliveryInfo');
