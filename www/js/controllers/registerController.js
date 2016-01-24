@@ -56,20 +56,14 @@ angular.module('MyApp')
 		            $localStorage.setObject('user', data.user);
 		            $state.go('app.home');
 		          } else {
-		            console.log('register failed');
+		            ValidationService.popUpAlert('Register Failed', data.message);
 		          }
 		        })
 		        .error(function(error) {
-		          console.log(error);
+		          ValidationService.popUpAlert('Register Error', 'Please try again later!');
 		        });
 			} else {
-				var alertPopup = $ionicPopup.alert({
-					title: 'Wrong Information!',
-					template: error_msg
-				});
-				alertPopup.then(function(res) {
-
-				});
+				ValidationService.popUpAlert('Wrong Information!', error_msg);
 			}
   		};
   });

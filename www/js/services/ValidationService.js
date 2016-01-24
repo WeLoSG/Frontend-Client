@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   // use factory for services
-  .factory('ValidationService', function($http, $timeout, $q) {
+  .factory('ValidationService', function($ionicPopup) {
 
     var isEmpty = function(val) {
       if (val == '' || val == null) {
@@ -27,11 +27,23 @@ angular.module('MyApp')
       return val_1 === var_2;
     }
 
+    
+    var popUpAlert = function(title, content) {
+      var alertPopup = $ionicPopup.alert({
+        title: title,
+        template: content
+      });
+      alertPopup.then(function(res) {
+
+      });
+    };
+
     // public api
     return {
       isEmpty: isEmpty,
       isEmail: isEmail,
-      isEqual: isEqual
+      isEqual: isEqual,
+      popUpAlert: popUpAlert
     };
 
   });

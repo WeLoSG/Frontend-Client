@@ -8,8 +8,7 @@
  */
 angular.module('MyApp')
   .controller('RouteController', function($scope, $ionicLoading, socket,
-    $localStorage, $ionicHistory, $state, LocationService,
-    $ionicPopup) {
+    $localStorage, $ionicHistory, $state, LocationService, ValidationService) {
 
     $scope.deliveryInfo = {
       from: {},
@@ -196,13 +195,7 @@ angular.module('MyApp')
         $localStorage.setObject('deliveryInfo', $scope.deliveryInfo);
         $state.go('app.search');
       } else {
-        var alertPopup = $ionicPopup.alert({
-          title: 'Missing Field!',
-          template: 'You have to enter the ' + validationResult + '!'
-        });
-        alertPopup.then(function(res) {
-
-        });
+        ValidationService.popUpAlert('Missing Field!', 'You have to enter the ' + validationResult + '!');
       }
     };
 

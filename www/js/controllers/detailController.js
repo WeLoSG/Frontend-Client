@@ -53,13 +53,7 @@ angular.module('MyApp')
         $localStorage.setObject('packageInfo', $scope.packageInfo);
         $state.go('app.route');
       } else {
-        var alertPopup = $ionicPopup.alert({
-          title: 'Missing Field!',
-          template: 'You have to enter the ' + validationResult + '!'
-        });
-        alertPopup.then(function(res) {
-
-        });
+        ValidationService.popUpAlert('Missing Field!', 'You have to enter the ' + validationResult + '!');
       }
     };
 

@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   .controller('LoginController', function($scope, $state, $ionicHistory,
-    $localStorage, UserService) {
+    $localStorage, UserService, ValidationService) {
 
     $scope.credential = {
       email: '',
@@ -21,18 +21,32 @@ angular.module('MyApp')
         disableAnimate: true,
         disableBack: true
       });
-      UserService.login($scope.credential.email, $scope.credential.password)
-        .success(function(data) {
-          if (data.status === 'success') {
-            $localStorage.set('token', data.welo_token);
-            $localStorage.setObject('user', data.user);
-            $state.go('app.home');
-          } else {
-            console.log('login failed');
-          }
-        })
-        .error(function(error) {
-          console.log(error);
-        });
+
+      var error_msg = '';
+      if (!ValidationService.isEmail($scope.credential.email)) {
+        error_msg = 'Please enter a valid email address!';
+      } else if (ValidationService.isEmpty($scope.credential.password)) {
+        error_msg = 'Please enter the password!';
+      } else {
+        error_msg = '';
+      }
+
+      if (error_msg === '') {
+        UserService.login($scope.credential.email, $scope.credential.password)
+          .success(function(data) {
+            if (data.status === 'success') {
+              $localStorage.set('token', data.welo_token);
+              $localStorage.setObject('user', data.user);
+              $state.go('app.home');
+            } else {
+              ValidationService.popUpAlert('Login Failed', data.message);
+            }
+          })
+          .error(function(error) {
+            ValidationService.popUpAlert('Login Error', 'Please try again later!');
+          });
+      } else {
+        ValidationService.popUpAlert('Wrong Info', error_msg);
+      }
     };
   });
