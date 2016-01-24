@@ -7,7 +7,7 @@
  * # OrdersController
  */
 angular.module('MyApp')
-  .controller('OrdersController', function($scope, $ionicLoading, OrderService) {
+  .controller('OrdersController', function($scope, $state, $ionicLoading, $localStorage, $ionicHistory, OrderService) {
     // do something with $scope
     function getStatus(statusId) {
       if (statusId === 1) {
@@ -52,5 +52,15 @@ angular.module('MyApp')
 	        $ionicLoading.hide();
 	        alert('an error occured', error);
 	      });
-	    });
+    });
+
+    $scope.goToOrderDetailPage = function(index) { 
+      $localStorage.setObject('orderDetail', $scope.orders[index]);
+      $ionicHistory.nextViewOptions({
+        disableAnimate: false,
+        disableBack: false,
+        historyRoot: false
+      });
+      $state.go('app.orderDetail');
+    };
   });

@@ -5,7 +5,7 @@
   </ion-header-bar>
 
   <ion-content class="orders-main">
-    <div class="card" ng-repeat="order in orders">
+    <div class="card" ng-repeat="order in orders" ng-click="goToOrderDetailPage($index)">
       <div class="item item-divider">
         <div class="row">
           <div class="title item-icon-left">

@@ -102,6 +102,17 @@ angular.module('MyApp')
         }
       }
     })
+    .state('app.orderDetail', {
+      url: '/orderDetail',
+      cache: false,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/orderDetail.html',
+          params: {orderId: null},
+          controller: 'OrderDetailController'
+        }
+      }
+    })
     .state('app.settings', {
       url: '/settings',
       cache: true,
