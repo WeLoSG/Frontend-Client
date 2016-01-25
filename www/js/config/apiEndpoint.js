@@ -14,7 +14,7 @@ angular.module('MyApp')
 
 // development
 .constant('API_ENDPOINT', {
-  host: 'http://192.168.1.19',
+  host: 'http://localhost',
   port: 3000,
   path: '',
   needsAuth: false
